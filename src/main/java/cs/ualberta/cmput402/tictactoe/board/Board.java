@@ -11,11 +11,14 @@ public class Board {
     private Player currentPlayer;
     private Player winner;
     private Player board[][];
+    private boolean draw;//draw is to detect draw
+
 
     public Board(){
         board = new Player[3][3];
         initBoard();
         winner = null;
+        draw = false;
         currentPlayer = Player.X;
     }
 
@@ -93,6 +96,16 @@ public class Board {
         return false;
     }
 
+    public boolean hasDraw(){
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(board[i][j] == Player.NONE)
+                    return false;
+            }
+        }
+        return true;
+    }
+
     private boolean isOnRightDiag(int col, int row){
         return (col == 0 && row == 0) || (col == 1 && row == 1) || (col == 2 & row == 2);
     }
@@ -122,6 +135,10 @@ public class Board {
 
     public Player getWinner() {
         return winner;
+    }
+
+    public boolean getDraw() {
+        return draw;
     }
 
     public Player getPlayerAtPos(int row, int col){
