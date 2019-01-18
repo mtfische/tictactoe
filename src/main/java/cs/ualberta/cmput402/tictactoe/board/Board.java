@@ -11,7 +11,7 @@ public class Board {
     private Player currentPlayer;
     private Player winner;
     private Player board[][];
-    private ScoreBoard scoreboard;
+    static private ScoreBoard scoreboard;
     private boolean draw;//draw is to detect draw
 
 
@@ -19,12 +19,12 @@ public class Board {
         board = new Player[3][3];
         scoreboard = new ScoreBoard();
         initBoard();
-        winner = null;
-        draw = false;
-        currentPlayer = Player.X;
     }
 
-    private void initBoard(){
+    public void initBoard(){
+    		winner = null;
+        draw = false;
+        currentPlayer = Player.X;
         for (int i = 0; i < 3; i++)
             for(int j = 0; j < 3; j++)
                 board[i][j] = Player.NONE;
@@ -118,9 +118,6 @@ public class Board {
         return (col == 0 && row == 2) || (col == 1 && row == 1) || (col == 2 & row == 0);
     }
 
-    public void printScore(){
-        System.out.print("print score not implmented.");
-    }
 
     public void printBoard(){
         for(int i  = 0; i < 3; i++){
