@@ -116,6 +116,10 @@ public class Board {
         return (col == 0 && row == 2) || (col == 1 && row == 1) || (col == 2 & row == 0);
     }
 
+    public void printScore(){
+        System.out.print("print score not implmented.");
+    }
+
     public void printBoard(){
         for(int i  = 0; i < 3; i++){
             for(int j = 0 ; j < 3; j++){

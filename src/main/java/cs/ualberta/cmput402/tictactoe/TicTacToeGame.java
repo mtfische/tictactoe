@@ -31,6 +31,7 @@ public class TicTacToeGame {
 
     public void playGame(){
         Scanner keyboardScanner = new Scanner(System.in);
+        board = new Board();
 
         while (board.getWinner() == null && board.getDraw() == false){
             board.printBoard();
@@ -54,8 +55,36 @@ public class TicTacToeGame {
         }
     }
 
+    public void playGameMultiTime(){
+        boolean stopGame = false;
+        do{
+            playGame();
+            Scanner newscan = new Scanner(System.in);
+            System.out.println("do you want to play again?\n"+"y for yes and n for no");
+            String userInputForNextGame = newscan.nextLine();
+            char inputchoice = userInputForNextGame.charAt(0);
+            boolean accept = false;
+            while(!accept){
+                if(inputchoice == 'y'){
+                    stopGame = false;
+                    accept = true;
+                }
+                else if(inputchoice == 'n'){
+                    board.printScore();
+                    stopGame = true;
+                    accept = true;
+                }
+                else{
+                    accept = false;
+                    System.out.println("invalid input for play again or not, please try again.");
+                    userInputForNextGame = newscan.nextLine();
+                }
+            }
+        } while(!stopGame);
+    }
+
     public static void main(String args[]){
         TicTacToeGame game = new TicTacToeGame();
-        game.playGame();
+        game.playGameMultiTime();
     }
 }
