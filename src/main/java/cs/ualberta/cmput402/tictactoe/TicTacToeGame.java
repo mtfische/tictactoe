@@ -72,9 +72,9 @@ public class TicTacToeGame {
             Scanner newscan = new Scanner(System.in);
             System.out.println("do you want to play again?\n"+"y for yes and n for no");
             String userInputForNextGame = newscan.nextLine();
-            char inputchoice = userInputForNextGame.charAt(0);
             boolean accept = false;
             while(!accept){
+                char inputchoice = userInputForNextGame.charAt(0);
                 if(inputchoice == 'y'){
                     stopGame = false;
                     accept = true;
