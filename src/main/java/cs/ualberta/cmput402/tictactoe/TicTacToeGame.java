@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class TicTacToeGame {
 
-    private Board board;
+    static private Board board;
 
     public TicTacToeGame(){
         board = new Board();
@@ -31,7 +31,7 @@ public class TicTacToeGame {
 
     public void playGame(){
         Scanner keyboardScanner = new Scanner(System.in);
-        board = new Board();
+        board.initBoard();
 
         while (board.getWinner() == null && board.getDraw() == false){
             board.printBoard();
@@ -63,7 +63,6 @@ public class TicTacToeGame {
         		}
             System.out.println("Player " + board.getWinner() + " has won the game!");
         }
-
     }
 
     public void playGameMultiTime(){

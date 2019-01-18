@@ -2,7 +2,7 @@ package cs.ualberta.cmput402.tictactoe.board;
 
 public class ScoreBoard {
 	
-	private int[][] array;
+	static private int[][] array;
 	
 	public ScoreBoard() {
 		array = new int[2][3];
@@ -29,7 +29,7 @@ public class ScoreBoard {
 	}
 	
 	public void printScore() {
-		System.out.println("Score:);
+		System.out.println("Score:");
 		System.out.println("Wins  (X, 0): " + this.array[0][0] + ", " + this.array[1][0] + "; ");
 		System.out.println("Loses (X, 0): " + this.array[0][1] + ", " + this.array[1][1] + "; ");
 		System.out.println("Draws (X, 0): " + this.array[0][2] + ", " + this.array[1][2] + ";");
