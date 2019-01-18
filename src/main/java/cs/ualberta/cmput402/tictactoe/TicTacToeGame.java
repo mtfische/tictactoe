@@ -47,11 +47,22 @@ public class TicTacToeGame {
 
         board.printBoard();
         if (board.getDraw()){
+        		this.board.incDraw(0);
+        		this.board.incDraw(1);
             System.out.println("draw");
         }
         else{
+        		if(board.getWinner() == Board.Player.X) {
+        			this.board.incWin(0);
+        			this.board.incLose(1);
+        		}
+        		if(board.getWinner() == Board.Player.O) {
+        			this.board.incWin(1);
+        			this.board.incLose(0);
+        		}
             System.out.println("Player " + board.getWinner() + " has won the game!");
         }
+
     }
 
     public static void main(String args[]){

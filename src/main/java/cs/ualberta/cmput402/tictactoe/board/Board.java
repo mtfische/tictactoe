@@ -11,11 +11,13 @@ public class Board {
     private Player currentPlayer;
     private Player winner;
     private Player board[][];
+    private ScoreBoard scoreboard;
     private boolean draw;//draw is to detect draw
 
 
     public Board(){
         board = new Player[3][3];
+        scoreboard = new ScoreBoard();
         initBoard();
         winner = null;
         draw = false;
@@ -130,6 +132,22 @@ public class Board {
             System.out.println("----------");
         }
     }
+    
+    public void incWin(int idx) {
+		this.scoreboard.incWin(idx);
+	}
+	
+	public void incLose(int idx) {
+		this.scoreboard.incLose(idx);
+	}
+	
+	public void incDraw(int idx) {
+		this.scoreboard.incDraw(idx);
+	}
+	
+	public void printScore() {
+		this.scoreboard.printScore();
+	}
 
     public Player getCurrentPlayer() {
         return currentPlayer;
