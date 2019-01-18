@@ -28,4 +28,11 @@ public class ScoreBoard {
 		this.array[idx][2] += 1;
 	}
 	
+	public void printScore() {
+		System.out.println("Score: Wins X, 0; Loses X, 0; Draw X, 0: ");
+		System.out.print(this.array[0][0] + ", " + this.array[1][0] + "; ");
+		System.out.print(this.array[0][1] + ", " + this.array[1][1] + "; ");
+		System.out.print(this.array[0][2] + ", " + this.array[1][2] + "; ");
+		System.out.println();
+	}
 }
