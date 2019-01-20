@@ -33,7 +33,7 @@ public class TicTacToeGame {
         Scanner keyboardScanner = new Scanner(System.in);
         board.initBoard();
 
-        while (board.getWinner() == null && board.getDraw() == false){
+        while (board.getWinner() == null && board.isDraw() == false){
             board.printBoard();
             promptNextPlayer();
             String line = keyboardScanner.nextLine();
@@ -47,20 +47,20 @@ public class TicTacToeGame {
         }
 
         board.printBoard();
-        if (board.getDraw()){
-        		this.board.incDraw(0);
-        		this.board.incDraw(1);
-            System.out.println("draw");
+        if (board.isDraw()){
+            this.board.incDraw(0);
+            this.board.incDraw(1);
+            System.out.println("The game end in a draw.");
         }
         else{
-        		if(board.getWinner() == Board.Player.X) {
-        			this.board.incWin(0);
-        			this.board.incLose(1);
-        		}
-        		if(board.getWinner() == Board.Player.O) {
-        			this.board.incWin(1);
-        			this.board.incLose(0);
-        		}
+            if(board.getWinner() == Board.Player.X) {
+                this.board.incWin(0);
+                this.board.incLose(1);
+            }
+            if(board.getWinner() == Board.Player.O) {
+                this.board.incWin(1);
+                this.board.incLose(0);
+            }
             System.out.println("Player " + board.getWinner() + " has won the game!");
         }
     }
