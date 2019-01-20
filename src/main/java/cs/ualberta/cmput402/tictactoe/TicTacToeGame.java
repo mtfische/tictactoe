@@ -50,7 +50,7 @@ public class TicTacToeGame {
         if (board.isDraw()){
             this.board.incDraw(0);
             this.board.incDraw(1);
-            System.out.println("draw");
+            System.out.println("The game end in a draw.");
         }
         else{
             if(board.getWinner() == Board.Player.X) {
