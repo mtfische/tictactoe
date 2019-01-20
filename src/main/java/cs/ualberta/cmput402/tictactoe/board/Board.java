@@ -22,7 +22,7 @@ public class Board {
     }
 
     public void initBoard(){
-    		winner = null;
+        winner = null;
         draw = false;
         currentPlayer = Player.X;
         for (int i = 0; i < 3; i++)
@@ -123,7 +123,7 @@ public class Board {
         for(int i  = 0; i < 3; i++){
             for(int j = 0 ; j < 3; j++){
 
-               System.out.print(getSymbol(board[i][j]));
+                System.out.print(getSymbol(board[i][j]));
 
                 if (j == 2)
                     System.out.println("");
@@ -158,7 +158,7 @@ public class Board {
         return winner;
     }
 
-    public boolean getDraw() {
+    public boolean isDraw() {
         return draw;
     }
 
