@@ -48,18 +48,18 @@ public class TicTacToeGame {
 
         board.printBoard();
         if (board.isDraw()){
-            this.board.incDraw(0);
-            this.board.incDraw(1);
+            board.incrementNumOfDraws(Board.Player.X);
+            board.incrementNumOfDraws(Board.Player.O);
             System.out.println("The game end in a draw.");
         }
         else{
             if(board.getWinner() == Board.Player.X) {
-                this.board.incWin(0);
-                this.board.incLose(1);
+                board.incrementNumOfWin(Board.Player.X);
+                board.incrementNumOfLoses(Board.Player.O);
             }
             if(board.getWinner() == Board.Player.O) {
-                this.board.incWin(1);
-                this.board.incLose(0);
+                board.incrementNumOfWin(Board.Player.O);
+                board.incrementNumOfLoses(Board.Player.X);
             }
             System.out.println("Player " + board.getWinner() + " has won the game!");
         }
@@ -80,7 +80,7 @@ public class TicTacToeGame {
                     accept = true;
                 }
                 else if(inputchoice == 'n'){
-                    board.printScore();
+                    board.printScoreBoard();
                     stopGame = true;
                     accept = true;
                 }

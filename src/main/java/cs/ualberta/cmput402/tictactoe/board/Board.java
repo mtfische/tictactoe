@@ -11,13 +11,13 @@ public class Board {
     private Player currentPlayer;
     private Player winner;
     private Player board[][];
-    static private ScoreBoard scoreboard;
+    private int scoreBoard[][];
     private boolean draw;//draw is to detect draw
 
 
     public Board(){
         board = new Player[3][3];
-        scoreboard = new ScoreBoard();
+        scoreBoard = new int[2][3];
         initBoard();
     }
 
@@ -134,22 +134,6 @@ public class Board {
         }
     }
     
-    public void incWin(int idx) {
-		this.scoreboard.incWin(idx);
-	}
-	
-	public void incLose(int idx) {
-		this.scoreboard.incLose(idx);
-	}
-	
-	public void incDraw(int idx) {
-		this.scoreboard.incDraw(idx);
-	}
-	
-	public void printScore() {
-		this.scoreboard.printScore();
-	}
-
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -165,6 +149,52 @@ public class Board {
     public Player getPlayerAtPos(int row, int col){
         return board[row][col];
     }
+    
+    public void incrementNumOfWin(Player player) {
+    	switch(player){
+        	case X:
+        		scoreBoard[0][0] += 1;
+        		break;
+        	case O:
+        		scoreBoard[1][0] += 1;
+        		break;
+        	default:
+    			break;
+    	}
+	}
+	
+	public void incrementNumOfLoses(Player player) {
+		switch(player){
+    		case X:
+    			scoreBoard[0][1] += 1;
+    			break;
+    		case O:
+    			scoreBoard[1][1] += 1;
+    			break;
+    		default:
+    			break;
+		}
+	}
+	
+	public void incrementNumOfDraws(Player player) {
+		switch(player){
+    		case X:
+    			scoreBoard[0][2] += 1;
+    			break;
+    		case O:
+    			scoreBoard[1][2] += 1;
+    			break;
+    		default:
+    			break;
+		}
+	}
+	
+	public void printScoreBoard() {
+		System.out.println("Score:");
+		System.out.println("Wins  (X, 0): " + this.scoreBoard[0][0] + ", " + this.scoreBoard[1][0] + "; ");
+		System.out.println("Loses (X, 0): " + this.scoreBoard[0][1] + ", " + this.scoreBoard[1][1] + "; ");
+		System.out.println("Draws (X, 0): " + this.scoreBoard[0][2] + ", " + this.scoreBoard[1][2] + ";");
+	}
 
 
 }
