@@ -11,15 +11,20 @@ public class Board {
     private Player currentPlayer;
     private Player winner;
     private Player board[][];
+    private int scoreBoard[][];
+    private boolean draw;//draw is to detect draw
+
 
     public Board(){
         board = new Player[3][3];
+        scoreBoard = new int[2][3];
         initBoard();
-        winner = null;
-        currentPlayer = Player.X;
     }
 
-    private void initBoard(){
+    public void initBoard(){
+        winner = null;
+        draw = false;
+        currentPlayer = Player.X;
         for (int i = 0; i < 3; i++)
             for(int j = 0; j < 3; j++)
                 board[i][j] = Player.NONE;
@@ -46,6 +51,8 @@ public class Board {
 
             if (hasWon(row, col))
                 winner = currentPlayer;
+            else if(hasDraw())
+                draw = true;
             else if(currentPlayer == Player.X)
                 currentPlayer = Player.O;
             else
@@ -93,6 +100,16 @@ public class Board {
         return false;
     }
 
+    public boolean hasDraw(){
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(board[i][j] == Player.NONE)
+                    return false;
+            }
+        }
+        return true;
+    }
+
     private boolean isOnRightDiag(int col, int row){
         return (col == 0 && row == 0) || (col == 1 && row == 1) || (col == 2 & row == 2);
     }
@@ -101,11 +118,12 @@ public class Board {
         return (col == 0 && row == 2) || (col == 1 && row == 1) || (col == 2 & row == 0);
     }
 
+
     public void printBoard(){
         for(int i  = 0; i < 3; i++){
             for(int j = 0 ; j < 3; j++){
 
-               System.out.print(getSymbol(board[i][j]));
+                System.out.print(getSymbol(board[i][j]));
 
                 if (j == 2)
                     System.out.println("");
@@ -115,7 +133,7 @@ public class Board {
             System.out.println("----------");
         }
     }
-
+    
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -124,9 +142,59 @@ public class Board {
         return winner;
     }
 
+    public boolean isDraw() {
+        return draw;
+    }
+
     public Player getPlayerAtPos(int row, int col){
         return board[row][col];
     }
+    
+    public void incrementNumOfWin(Player player) {
+    	switch(player){
+        	case X:
+        		scoreBoard[0][0] += 1;
+        		break;
+        	case O:
+        		scoreBoard[1][0] += 1;
+        		break;
+        	default:
+    			break;
+    	}
+	}
+	
+	public void incrementNumOfLoses(Player player) {
+		switch(player){
+    		case X:
+    			scoreBoard[0][1] += 1;
+    			break;
+    		case O:
+    			scoreBoard[1][1] += 1;
+    			break;
+    		default:
+    			break;
+		}
+	}
+	
+	public void incrementNumOfDraws(Player player) {
+		switch(player){
+    		case X:
+    			scoreBoard[0][2] += 1;
+    			break;
+    		case O:
+    			scoreBoard[1][2] += 1;
+    			break;
+    		default:
+    			break;
+		}
+	}
+	
+	public void printScoreBoard() {
+		System.out.println("Score:");
+		System.out.println("Wins  (X, 0): " + this.scoreBoard[0][0] + ", " + this.scoreBoard[1][0] + "; ");
+		System.out.println("Loses (X, 0): " + this.scoreBoard[0][1] + ", " + this.scoreBoard[1][1] + "; ");
+		System.out.println("Draws (X, 0): " + this.scoreBoard[0][2] + ", " + this.scoreBoard[1][2] + ";");
+	}
 
 
 }

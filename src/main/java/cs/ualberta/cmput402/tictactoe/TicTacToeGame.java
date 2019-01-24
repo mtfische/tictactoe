@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class TicTacToeGame {
 
-    private Board board;
+    static private Board board;
 
     public TicTacToeGame(){
         board = new Board();
@@ -31,8 +31,9 @@ public class TicTacToeGame {
 
     public void playGame(){
         Scanner keyboardScanner = new Scanner(System.in);
+        board.initBoard();
 
-        while (board.getWinner() == null){
+        while (board.getWinner() == null && board.isDraw() == false){
             board.printBoard();
             promptNextPlayer();
             String line = keyboardScanner.nextLine();
@@ -46,11 +47,54 @@ public class TicTacToeGame {
         }
 
         board.printBoard();
-        System.out.println("Player " + board.getWinner() + " has won the game!");
+        if (board.isDraw()){
+            board.incrementNumOfDraws(Board.Player.X);
+            board.incrementNumOfDraws(Board.Player.O);
+            System.out.println("The game end in a draw.");
+        }
+        else{
+            if(board.getWinner() == Board.Player.X) {
+                board.incrementNumOfWin(Board.Player.X);
+                board.incrementNumOfLoses(Board.Player.O);
+            }
+            if(board.getWinner() == Board.Player.O) {
+                board.incrementNumOfWin(Board.Player.O);
+                board.incrementNumOfLoses(Board.Player.X);
+            }
+            System.out.println("Player " + board.getWinner() + " has won the game!");
+        }
+    }
+
+    public void playGameMultiTime(){
+        boolean stopGame = false;
+        do{
+            playGame();
+            Scanner newscan = new Scanner(System.in);
+            System.out.println("do you want to play again?\n"+"y for yes and n for no");
+            String userInputForNextGame = newscan.nextLine();
+            boolean accept = false;
+            while(!accept){
+                char inputchoice = userInputForNextGame.charAt(0);
+                if(inputchoice == 'y'){
+                    stopGame = false;
+                    accept = true;
+                }
+                else if(inputchoice == 'n'){
+                    board.printScoreBoard();
+                    stopGame = true;
+                    accept = true;
+                }
+                else{
+                    accept = false;
+                    System.out.println("invalid input for play again or not, please try again.");
+                    userInputForNextGame = newscan.nextLine();
+                }
+            }
+        } while(!stopGame);
     }
 
     public static void main(String args[]){
         TicTacToeGame game = new TicTacToeGame();
-        game.playGame();
+        game.playGameMultiTime();
     }
 }
